@@ -19,23 +19,19 @@ jobs:
           script: |
             const publicIssue = context.payload.issue;
 
-            // Create issue in private repo
             const privateIssue = await github.rest.issues.create({
               owner: "Power-Portals-Pro",
               repo: "PowerPortalsPro",
               title: `[Public #${publicIssue.number}] ${publicIssue.title}`,
-              body: `
-A public issue was opened:
+              body: `A public issue was opened:
 
 **Public Issue:** ${publicIssue.html_url}
 
 ---
 
-${publicIssue.body}
-              `
+${publicIssue.body}`
             });
 
-            // Add comment back to public issue with link
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
