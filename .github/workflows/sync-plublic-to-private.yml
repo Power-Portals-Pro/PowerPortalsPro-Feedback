@@ -1,0 +1,45 @@
+name: Mirror Public Issues to Private Repo
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create linked issue in private repo
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PRIVATE_REPO_PAT }}
+          script: |
+            const publicIssue = context.payload.issue;
+
+            // Create issue in private repo
+            const privateIssue = await github.rest.issues.create({
+              owner: "Power-Portals-Pro",
+              repo: "PowerPortalsPro",
+              title: `[Public #${publicIssue.number}] ${publicIssue.title}`,
+              body: `
+A public issue was opened:
+
+**Public Issue:** ${publicIssue.html_url}
+
+---
+
+${publicIssue.body}
+              `
+            });
+
+            // Add comment back to public issue with link
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: publicIssue.number,
+              body: `Thanks for the report!  
+An internal tracking issue has been created: ${privateIssue.data.html_url}`
+            });
