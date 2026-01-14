@@ -1,0 +1,10 @@
+name: Question
+description: Ask a question about Power Portals Pro
+labels: [question]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+    validations:
+      required: true
