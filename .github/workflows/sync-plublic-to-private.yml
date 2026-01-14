@@ -24,12 +24,12 @@ jobs:
               repo: "PowerPortalsPro",
               title: `[Public #${publicIssue.number}] ${publicIssue.title}`,
               body: `A public issue was opened:
-
-**Public Issue:** ${publicIssue.html_url}
-
----
-
-${publicIssue.body}`
+              
+              **Public Issue:** ${publicIssue.html_url}
+              
+              ---
+              
+              ${publicIssue.body}`
             });
 
             await github.rest.issues.createComment({
@@ -37,5 +37,5 @@ ${publicIssue.body}`
               repo: context.repo.repo,
               issue_number: publicIssue.number,
               body: `Thanks for the report!  
-An internal tracking issue has been created: ${privateIssue.data.html_url}`
+              An internal tracking issue has been created: ${privateIssue.data.html_url}`
             });
