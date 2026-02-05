@@ -1,6 +1,6 @@
 # Power Portals Pro — Public Issue Tracker
 
-Welcome! This repository exists solely as the **public issue tracker** for **Power Portals Pro**.
+Welcome! This repository exists solely as the **public issue tracker** for **[Power Portals Pro](https://powerportalspro.com)**.
 
 Because the main product codebase is private, this repository provides a place for customers and partners to:
 
